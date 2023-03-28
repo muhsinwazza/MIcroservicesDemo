@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  customerservice:
+    container_name: customer-service
+    image: ${DOCKER_REGISTRY-}customerservice
+    build:
+      context: .
+      dockerfile: CustomerService/Dockerfile
+    ports:
+        - 8080:80
+    environment:
+        - dbHost=customerDb
+        - dbName=mdb_customer 
+  
+  customerDb:
+    container_name: mongodb
+    image: mongo
+    ports:
+        - 8081:27017
+        
+    
+     
